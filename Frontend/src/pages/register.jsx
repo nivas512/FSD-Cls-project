@@ -9,13 +9,13 @@ function Register(){
     const {register,handleSubmit,formState:{errors}}=useForm({
         resolver: zodResolver(registerschema)
     })
-    function onSubmit1(data){
+    function onSubmit(data){
         console.log(data)
         alert("register sucess")
-        navigate("/")
+        navigate("/",{state:data})
     }
     return(
-        <form onSubmit={handleSubmit(onSubmit1)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
         <input type="text" required placeholder="Enter your name" name="username" {...register("name")}/>
         <p>{errors.name?.message}</p>
          <input type="email" required placeholder="Enter your email" name="email" {...register("email")}/>

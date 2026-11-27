@@ -1,21 +1,32 @@
 import { useState } from "react";
+import { useLocation,useNavigate } from "react-router-dom";
 function Login(){
       //const[email, setEmail] = useState("");
   //const[password, setPassword] = useState("");
-  function handleSubmit(e){
-    e.preventDefault();
-  console.log(formdata)
-}
-const[formdata, setFormdata] = useState({
-  username:"",
-  password:""
-})
+  const location=useLocation();
+  const navigate=useNavigate();
+  const[logindata,setLogindata]=useState({
+    username:"",
+    password:""
+ } )
+
+
 function handleChange(e){
-   setFormdata({...formdata,
+   setLogindata({...logindata,
       [e.target.name]:e.target.value
-})
- 
+})}
+   function handleSubmit(e){
+    e.preventDefault();
+  const registerdata=location.state
+    if(registerdata.name===logindata.username&&registerdata.password===logindata.password){
+      console.log("if success")
+      navigate("/dashboard",{state:logindata})
+    }else{
+      console.log("invalid")
+    }
 }
+
+
     return(
       /* <div className="text-blue-500">HI </div>
 
